@@ -10,15 +10,13 @@ namespace LTT.Loopback
 {
     class ComPort : I_Loopback
     {
-        #region Fields
         int _baudrate;
-        SerialPort _serialPort; //Serial port, which we are using for communication with Cheetah protocol based Cable
+        SerialPort _serialPort; //Serial port used for communication
         AutoResetEvent _readQueueMutex; //Mutex to signal queue reader that there are new data in queue
         Thread _threadReadSerialPort;
         CancellationTokenSource _readSerialPortCancel;
-        ConcurrentQueue<byte> _rxBuffer;
+        ConcurrentQueue<byte> _rxBuffer; //Queue where received bytes are stored
         const int TIMEOUT_CLOSE_SECONDS = 1; //If COM port is not closed within N seconds, send the signal again
-        #endregion
 
         /// <summary>
         /// Reference on RX buffer
@@ -28,16 +26,20 @@ namespace LTT.Loopback
             get { return _rxBuffer; }
         }
 
+        /// <summary>
+        /// When recoverable error occurs
+        /// </summary>
         public event EventHandler<string> OnError;
-        public event EventHandler OnByteReceived;
+        /// <summary>
+        /// When communication is aborted (i.e. cable disconnected)
+        /// </summary>
         public event EventHandler OnAbort;
 
         /// <summary>
         /// Create new VCP sink. Mutex is set always when byte is received on rxBuffer
         /// </summary>
         /// <param name="readQueueMutex"></param>
-        /// <param name="rxBuffer"></param>
-        /// <param name="baudrate">Set baudrate or use default 460800</param>
+        /// <param name="baudrate">Baudrate in bauds</param>
         public ComPort(AutoResetEvent readQueueMutex, int baudrate)
         {
             _readQueueMutex = readQueueMutex;
@@ -45,6 +47,11 @@ namespace LTT.Loopback
             _baudrate = baudrate;
         }
 
+        /// <summary>
+        /// Connect to COM port and start reading data in separate thread
+        /// </summary>
+        /// <param name="comPortName"></param>
+        /// <exception cref="Exception"></exception>
         public void Init(string comPortName)
         {
             //Already inited
@@ -128,7 +135,6 @@ namespace LTT.Loopback
                     for (int i = 0; i < numBytesRead; i++)
                     {
                         _rxBuffer.Enqueue(receiveBuffer[i]);
-                        OnByteReceived?.Invoke(this, null);
                     }
                     //Signal thread which is reading from buffer, that data are ready
                     _readQueueMutex.Set();

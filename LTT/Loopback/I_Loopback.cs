@@ -11,7 +11,6 @@ namespace LTT.Loopback
         ConcurrentQueue<byte> ReceivedBytes { get; }
 
         event EventHandler<string> OnError;
-        event EventHandler OnByteReceived;
         event EventHandler OnAbort;
 
         void Init(string path);
