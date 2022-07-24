@@ -10,56 +10,41 @@ namespace LTT
 {
     internal class CLI
     {
-        AutoResetEvent _readQueueMutex;
-        string _com;
-
         public int Execute(Dictionary<ArgumentNames, string> args)
         {
             int baudrate = 115200;
-            _com = args[ArgumentNames.ComPort];
-
-            _readQueueMutex = new AutoResetEvent(false);
-            I_Loopback vcp = new ComPort(_readQueueMutex, baudrate);
+            
+            I_Loopback vcp = new ComPort(baudrate);
             vcp.OnError += VCP_OnError;
+            vcp.Init(args[ArgumentNames.ComPort]);
 
-            Run(vcp);
-
-            return 0;
-        }
-
-        public void Run(I_Loopback vcp)
-        {
-            byte[] data = new byte[] { 0xAA };
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            vcp.Init(_com);
-
-
-            for (int i = 0; i < 25; i++)
+            LoopbackWorker lw = new LoopbackWorker();
+            LoopbackWorkerSetup lws = new LoopbackWorkerSetup()
             {
-                sw.Restart();
-                vcp.Write(data);
+                Sink = vcp,
+                LoopbackType = LoopbackType.Static,
+                PacketSizeStart = 1,
+                PacketSizeEnd = 100,
+                Count = 100,
+            };
 
-                if (_readQueueMutex.WaitOne(1000))
-                {
-                    //Deque until 0xAA is found
-                    byte c;
-                    while (!vcp.ReceivedBytes.TryDequeue(out c)) ;
-                    if (c == 0xAA)
-                    {
-                        sw.Stop();
-                        Console.WriteLine("Processing took {0} ms", sw.ElapsedMilliseconds);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Error: Timeout");
-                    return;
-                }
+            lw.Start(lws);
+
+            //Race condition
+            do
+            {
+                Thread.Sleep(500);
+            }
+            while (lw.IsRunning);
+
+            int exitCode = 0;
+            if(lw.Error != null)
+            {
+                Console.WriteLine("Error: " + lw.Error.Message);
+                exitCode = -1;
             }
 
-
-            vcp.Dispose();
+            return exitCode;
         }
 
         private void VCP_OnError(object sender, string e)

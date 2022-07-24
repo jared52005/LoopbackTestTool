@@ -26,6 +26,11 @@ namespace LTT.Loopback
             get { return _rxBuffer; }
         }
 
+        public AutoResetEvent ReadQueueMutex
+        {
+            get { return _readQueueMutex; }
+        }
+
         /// <summary>
         /// When recoverable error occurs
         /// </summary>
@@ -40,9 +45,9 @@ namespace LTT.Loopback
         /// </summary>
         /// <param name="readQueueMutex"></param>
         /// <param name="baudrate">Baudrate in bauds</param>
-        public ComPort(AutoResetEvent readQueueMutex, int baudrate)
+        public ComPort(int baudrate)
         {
-            _readQueueMutex = readQueueMutex;
+            _readQueueMutex = new AutoResetEvent(false); ;
             _rxBuffer = new ConcurrentQueue<byte>();
             _baudrate = baudrate;
         }
