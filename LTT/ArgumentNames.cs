@@ -9,5 +9,10 @@ namespace LTT
     enum ArgumentNames
     {
         ComPort,
+        Baudrate,
+        PacketSizeStart,
+        PacketSizeEnd,
+        Count,
+        LoopbackType,
     }
 }

@@ -20,7 +20,7 @@ namespace LTT
         [STAThread]
         static int Main(string[] args)
         {
-            Dictionary<ArgumentNames, string> pArgs;
+            Dictionary<ArgumentNames, object> pArgs;
             ExitCode = 0;
             if (VerifyArguments(args, out pArgs))
             {
@@ -45,7 +45,7 @@ namespace LTT
 
             return ExitCode;
         }
-        static bool VerifyArguments(string[] args, out Dictionary<ArgumentNames, string> pArgs)
+        static bool VerifyArguments(string[] args, out Dictionary<ArgumentNames, object> pArgs)
         {
             pArgs = null;
             if (args == null || args.Length == 0)
@@ -53,13 +53,57 @@ namespace LTT
                 return true;
             }
 
-            pArgs = new Dictionary<ArgumentNames, string>();
+            //Setup default values
+            pArgs = new Dictionary<ArgumentNames, object>();
+            pArgs.Add(ArgumentNames.Count, 100);
+            pArgs.Add(ArgumentNames.Baudrate, 115200);
+            pArgs.Add(ArgumentNames.PacketSizeStart, 1);
+            pArgs.Add(ArgumentNames.PacketSizeEnd, 100);
+            pArgs.Add(ArgumentNames.LoopbackType, Loopback.LoopbackType.Dynamic);
+
+            int tmp = 0;
             for (int i = 0; i < args.Length; i++)
             {
                 switch (args[i].ToLower())
                 {
                     case "-comport":
                         pArgs.Add(ArgumentNames.ComPort, args[i + 1]);
+                        break;
+                    case "-packetsizestart":
+                        try
+                        {
+                            tmp = Convert.ToInt32(args[i + 1]);
+                            Console.WriteLine("Error: Argument {0} is not a number.", args[i]);
+                        }
+                        catch
+                        {
+                            return false;
+                        }
+                        pArgs[ArgumentNames.PacketSizeStart] = tmp;
+                        break;
+                    case "-packetsizeend":
+                        try
+                        {
+                            tmp = Convert.ToInt32(args[i + 1]);
+                            Console.WriteLine("Error: Argument {0} is not a number.", args[i]);
+                        }
+                        catch
+                        {
+                            return false;
+                        }
+                        pArgs[ArgumentNames.PacketSizeEnd] = tmp;
+                        break;
+                    case "-count":
+                        try
+                        {
+                            tmp = Convert.ToInt32(args[i + 1]);
+                            Console.WriteLine("Error: Argument {0} is not a number.", args[i]);
+                        }
+                        catch
+                        {
+                            return false;
+                        }
+                        pArgs[ArgumentNames.Count] = tmp;
                         break;
                     default:
                         break;

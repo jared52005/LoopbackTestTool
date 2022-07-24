@@ -10,22 +10,20 @@ namespace LTT
 {
     internal class CLI
     {
-        public int Execute(Dictionary<ArgumentNames, string> args)
-        {
-            int baudrate = 115200;
-            
-            I_Loopback vcp = new ComPort(baudrate);
+        public int Execute(Dictionary<ArgumentNames, object> args)
+        {           
+            I_Loopback vcp = new ComPort((int)args[ArgumentNames.Baudrate]);
             vcp.OnError += VCP_OnError;
-            vcp.Init(args[ArgumentNames.ComPort]);
+            vcp.Init(args[ArgumentNames.ComPort].ToString());
 
             LoopbackWorker lw = new LoopbackWorker();
             LoopbackWorkerSetup lws = new LoopbackWorkerSetup()
             {
                 Sink = vcp,
-                LoopbackType = LoopbackType.Static,
-                PacketSizeStart = 1,
-                PacketSizeEnd = 100,
-                Count = 100,
+                LoopbackType = (LoopbackType)args[ArgumentNames.LoopbackType],
+                PacketSizeStart = (int)args[ArgumentNames.PacketSizeStart],
+                PacketSizeEnd = (int)args[ArgumentNames.PacketSizeEnd],
+                Count = (int)args[ArgumentNames.Count],
             };
 
             lw.Start(lws);
