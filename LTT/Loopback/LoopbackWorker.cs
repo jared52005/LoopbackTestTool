@@ -148,6 +148,24 @@ namespace LTT.Loopback
             }
         }
 
+        public bool IsValid
+        {
+            get
+            {
+                if(PacketTx == null || PacketRx == null)
+                {
+                    return false;
+                }
+
+                if(PacketTx.Length != PacketRx.Length)
+                {
+                    return false;
+                }
+
+                return PacketTx.SequenceEqual(PacketRx);
+            }
+        }
+
         public LoopbackPacketItem(int size)
         {
             PacketTx = new byte[size + 1];
@@ -183,8 +201,18 @@ namespace LTT.Loopback
             {
                 sBaudrate = $"{Bps} bps";
             }
+
+            string sValid;
+            if(IsValid)
+            {
+                sValid = "VALID";
+            }
+            else
+            {
+                sValid = "INVALID";
+            }
             
-            return $"[{Delay} ms][{PacketTx.Length} bytes][{sBaudrate}]";
+            return $"[{Delay} ms][{PacketTx.Length} bytes][{sBaudrate}] - {sValid}";
         }
     }
 
