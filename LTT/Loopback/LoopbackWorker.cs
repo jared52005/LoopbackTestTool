@@ -35,7 +35,11 @@ namespace LTT.Loopback
             for (int i = 0; i < _setup.Count; i++)
             {
                 //Setup seize
-                int size = _setup.PacketSizeStart + i;
+                int size = _setup.PacketSizeStart;
+                if(_setup.LoopbackType == LoopbackType.Dynamic)
+                {
+                    size += i;
+                }
                 if(size > _setup.PacketSizeEnd)
                 {
                     size = _setup.PacketSizeEnd;
