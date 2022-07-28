@@ -70,47 +70,71 @@ namespace LTT
                         pArgs.Add(ArgumentNames.ComPort, args[i + 1]);
                         break;
                     case "-packetsizestart":
-                        try
+                        tmp = ConvertNumberWithSuffix(args[i], args[i + 1]);
+                        if (tmp > 0)
                         {
-                            tmp = Convert.ToInt32(args[i + 1]);
-                            Console.WriteLine("Error: Argument {0} is not a number.", args[i]);
+                            pArgs[ArgumentNames.PacketSizeStart] = tmp;
                         }
-                        catch
+                        else
                         {
                             return false;
                         }
-                        pArgs[ArgumentNames.PacketSizeStart] = tmp;
                         break;
                     case "-packetsizeend":
-                        try
+                        tmp = ConvertNumberWithSuffix(args[i], args[i + 1]);
+                        if (tmp > 0)
                         {
-                            tmp = Convert.ToInt32(args[i + 1]);
-                            Console.WriteLine("Error: Argument {0} is not a number.", args[i]);
+                            pArgs[ArgumentNames.PacketSizeEnd] = tmp;
                         }
-                        catch
+                        else
                         {
                             return false;
                         }
-                        pArgs[ArgumentNames.PacketSizeEnd] = tmp;
                         break;
                     case "-count":
-                        try
+                        tmp = ConvertNumberWithSuffix(args[i], args[i + 1]);
+                        if (tmp > 0)
                         {
-                            tmp = Convert.ToInt32(args[i + 1]);
-                            Console.WriteLine("Error: Argument {0} is not a number.", args[i]);
+                            pArgs[ArgumentNames.Count] = tmp;
                         }
-                        catch
+                        else
                         {
                             return false;
                         }
-                        pArgs[ArgumentNames.Count] = tmp;
                         break;
                     default:
                         break;
                 }
             }
-
             return true;
+        }
+
+        private static int ConvertNumberWithSuffix(string argName, string argVal)
+        {
+            try
+            {
+                //Check if ends with k/m/g => add proper amount of zeros instead, kilo-mega-giga
+                string sVal = argVal.ToLower();
+                if (sVal.Contains("k"))
+                {
+                    sVal = sVal.Replace("k", "000");
+                }
+                else if (sVal.Contains("m"))
+                {
+                    sVal = sVal.Replace("m", "000000");
+                }
+                else if (sVal.Contains("g"))
+                {
+                    sVal = sVal.Replace("g", "000000000");
+                }
+                return Convert.ToInt32(sVal);
+                
+            }
+            catch
+            {
+                Console.WriteLine("Error: Argument {0} is not a number ({1})", argName, argVal);
+                return -1;
+            }
         }
     }
 }
