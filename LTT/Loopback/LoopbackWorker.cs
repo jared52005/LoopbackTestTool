@@ -27,6 +27,10 @@ namespace LTT.Loopback
 
         public DateTime StartTime { get; private set; }
 
+        public event EventHandler OnStart;
+        public event EventHandler<Exception> OnEnd;
+        public event EventHandler<int> OnProgress;
+
         public LoopbackWorker()
         {
             _bw = new BackgroundWorker();
@@ -37,6 +41,8 @@ namespace LTT.Loopback
 
         private void DoWork(object sender, DoWorkEventArgs e)
         {
+            int progress = 0;
+            int lastProgress = -1;
             _tests.Clear();
             TransferredBytes = 0;
             Stopwatch sw = new Stopwatch();
@@ -68,6 +74,13 @@ namespace LTT.Loopback
                 Console.WriteLine(lpi);
 
                 _tests.Add(lpi);
+
+                progress = (_tests.Count * 100) / _setup.Count;
+                if(progress != lastProgress)
+                {
+                    lastProgress = progress;
+                    OnProgress?.Invoke(this, lastProgress);
+                }
             }
         }
 
@@ -110,6 +123,7 @@ namespace LTT.Loopback
         {
             _setup.Sink.Dispose();
             Error = e.Error;
+            OnEnd?.Invoke(this, Error);
         }
 
         public void Start(LoopbackWorkerSetup setup)
@@ -120,6 +134,7 @@ namespace LTT.Loopback
             }
             StartTime = DateTime.Now;
             _setup = setup;
+            OnStart?.Invoke(this, null);
             _bw.RunWorkerAsync();
         }
     }

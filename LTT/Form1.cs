@@ -14,6 +14,7 @@ namespace LTT
 {
     public partial class Form1 : Form
     {
+        int _progress = 0;
         LoopbackWorker _lw;
         Dictionary<string, object> _calculatedValues;
 
@@ -23,6 +24,9 @@ namespace LTT
             InitializeComponent();
 
             _lw = new LoopbackWorker();
+            _lw.OnStart += LwStart;
+            _lw.OnEnd += LwEnd;
+            _lw.OnProgress += LwProgress;
 
             //List elements
             _calculatedValues = new Dictionary<string, object>();
@@ -45,6 +49,28 @@ namespace LTT
             }
 
             timer1.Start();
+        }
+
+        private void LwProgress(object sender, int e)
+        {
+            _progress = e;
+        }
+
+        private void LwEnd(object sender, Exception e)
+        {
+            if (e == null)
+            {
+                toolStripStatusLabel1.Text = "STOP";
+            }
+            else
+            {
+                toolStripStatusLabel1.Text = "ERROR";
+            }
+        }
+
+        private void LwStart(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "RUN";
         }
 
         public static void SetDoubleBuffered(Control control)
@@ -143,6 +169,12 @@ namespace LTT
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //Update progress
+            if (toolStripProgressBar1.Value != _progress)
+            {
+                toolStripProgressBar1.Value = _progress;
+            }
+
             if (!_lw.IsRunning)
             {
                 return;
@@ -152,6 +184,11 @@ namespace LTT
 
             int packetTransferred = _lw.Tests.Count;
             long transferredBytes = _lw.TransferredBytes;
+
+            if(packetTransferred == 0)
+            {
+                return;
+            }
 
             TimeSpan ts = DateTime.Now - _lw.StartTime;
             _calculatedValues["Processed datagrams"] = packetTransferred.ToString();
@@ -166,7 +203,10 @@ namespace LTT
             _calculatedValues["Transferred [kByte]"] = transferredBytes / 1024;
             _calculatedValues["Run Time [minutes]"] = (long)(ts.TotalMilliseconds / 60000);
 
-            _calculatedValues["Request size"] = "0x" + _lw.Tests[packetTransferred - 1].PacketTx.Length.ToString("X");
+            if (_lw.Tests[packetTransferred - 1].PacketTx != null)
+            {
+                _calculatedValues["Request size"] = "0x" + _lw.Tests[packetTransferred - 1].PacketTx.Length.ToString("X");
+            }
 
             //Update list view with new values
             foreach (ListViewItem lvi in listView1.Items)

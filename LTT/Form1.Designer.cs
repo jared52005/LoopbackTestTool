@@ -38,21 +38,25 @@
             this.textBox_StartSize = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_Com = new System.Windows.Forms.TabPage();
+            this.button_ComTest = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.textBox_baudrate = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox_comPort = new System.Windows.Forms.TextBox();
             this.tabPage_Ble = new System.Windows.Forms.TabPage();
             this.tabPage_Tcp = new System.Windows.Forms.TabPage();
             this.tabPage_Ws = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button_ComTest = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_Com.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -152,6 +156,25 @@
             this.tabPage_Com.TabIndex = 0;
             this.tabPage_Com.Text = "COM Port";
             // 
+            // button_ComTest
+            // 
+            this.button_ComTest.Location = new System.Drawing.Point(5, 97);
+            this.button_ComTest.Name = "button_ComTest";
+            this.button_ComTest.Size = new System.Drawing.Size(97, 23);
+            this.button_ComTest.TabIndex = 4;
+            this.button_ComTest.Text = "Start COM Test";
+            this.button_ComTest.UseVisualStyleBackColor = true;
+            this.button_ComTest.Click += new System.EventHandler(this.button_ComTest_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Baudrate";
+            // 
             // textBox_baudrate
             // 
             this.textBox_baudrate.Location = new System.Drawing.Point(64, 32);
@@ -204,25 +227,6 @@
             this.tabPage_Ws.TabIndex = 3;
             this.tabPage_Ws.Text = "WebSocket";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 35);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Baudrate";
-            // 
-            // button_ComTest
-            // 
-            this.button_ComTest.Location = new System.Drawing.Point(5, 97);
-            this.button_ComTest.Name = "button_ComTest";
-            this.button_ComTest.Size = new System.Drawing.Size(97, 23);
-            this.button_ComTest.TabIndex = 4;
-            this.button_ComTest.Text = "Start COM Test";
-            this.button_ComTest.UseVisualStyleBackColor = true;
-            this.button_ComTest.Click += new System.EventHandler(this.button_ComTest_Click);
-            // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -250,11 +254,34 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgressBar1,
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 636);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(541, 22);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(29, 17);
+            this.toolStripStatusLabel1.Text = "N/A";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(541, 658);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox1);
@@ -265,7 +292,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage_Com.ResumeLayout(false);
             this.tabPage_Com.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -292,6 +322,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 
