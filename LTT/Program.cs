@@ -47,14 +47,13 @@ namespace LTT
         }
         static bool VerifyArguments(string[] args, out Dictionary<ArgumentNames, object> pArgs)
         {
-            pArgs = null;
+            pArgs = new Dictionary<ArgumentNames, object>();
             if (args == null || args.Length == 0)
             {
                 return true;
             }
 
             //Setup default values
-            pArgs = new Dictionary<ArgumentNames, object>();
             pArgs.Add(ArgumentNames.Count, 100);
             pArgs.Add(ArgumentNames.Baudrate, 115200);
             pArgs.Add(ArgumentNames.PacketSizeStart, 1);
