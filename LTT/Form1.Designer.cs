@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox_Count = new System.Windows.Forms.TextBox();
             this.textBox_EndSize = new System.Windows.Forms.TextBox();
@@ -45,6 +46,10 @@
             this.tabPage_Ws = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.button_ComTest = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_Com.SuspendLayout();
@@ -218,11 +223,39 @@
             this.button_ComTest.UseVisualStyleBackColor = true;
             this.button_ComTest.Click += new System.EventHandler(this.button_ComTest_Click);
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(12, 255);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(517, 216);
+            this.listView1.TabIndex = 4;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 92;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
+            this.columnHeader2.Width = 406;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 329);
+            this.ClientSize = new System.Drawing.Size(541, 658);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -255,6 +288,10 @@
         private System.Windows.Forms.TextBox textBox_comPort;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button_ComTest;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

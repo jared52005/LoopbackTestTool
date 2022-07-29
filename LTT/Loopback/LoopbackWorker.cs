@@ -18,6 +18,15 @@ namespace LTT.Loopback
 
         public Exception Error { get; private set; }
 
+        /// <summary>
+        /// List of all executed tests
+        /// </summary>
+        public List<LoopbackPacketItem> Tests { get { return _tests; } }
+
+        public long TransferredBytes { get; private set; }
+
+        public DateTime StartTime { get; private set; }
+
         public LoopbackWorker()
         {
             _bw = new BackgroundWorker();
@@ -29,6 +38,7 @@ namespace LTT.Loopback
         private void DoWork(object sender, DoWorkEventArgs e)
         {
             _tests.Clear();
+            TransferredBytes = 0;
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
@@ -53,6 +63,7 @@ namespace LTT.Loopback
                 ReceivePacket(lpi);
                 sw.Stop();
                 lpi.Delay = sw.ElapsedMilliseconds;
+                TransferredBytes = TransferredBytes + lpi.PacketTx.Length;
 
                 Console.WriteLine(lpi);
 
@@ -107,6 +118,7 @@ namespace LTT.Loopback
             {
                 return;
             }
+            StartTime = DateTime.Now;
             _setup = setup;
             _bw.RunWorkerAsync();
         }
