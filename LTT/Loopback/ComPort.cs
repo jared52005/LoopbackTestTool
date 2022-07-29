@@ -89,7 +89,7 @@ namespace LTT.Loopback
             }
             catch (Exception ex)
             {
-                OnError.Invoke(this, "Unable to open COM port. " + ex.Message);
+                OnError?.Invoke(this, "Unable to open COM port. " + ex.Message);
 
                 try
                 {
