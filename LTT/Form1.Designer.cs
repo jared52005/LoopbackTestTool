@@ -37,14 +37,14 @@
             this.textBox_StartSize = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_Com = new System.Windows.Forms.TabPage();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox_baudrate = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_comPort = new System.Windows.Forms.TextBox();
             this.tabPage_Ble = new System.Windows.Forms.TabPage();
             this.tabPage_Tcp = new System.Windows.Forms.TabPage();
             this.tabPage_Ws = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_ComTest = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_Com.SuspendLayout();
@@ -73,6 +73,7 @@
             this.textBox_Count.Name = "textBox_Count";
             this.textBox_Count.Size = new System.Drawing.Size(100, 20);
             this.textBox_Count.TabIndex = 6;
+            this.textBox_Count.Text = "123";
             // 
             // textBox_EndSize
             // 
@@ -80,6 +81,7 @@
             this.textBox_EndSize.Name = "textBox_EndSize";
             this.textBox_EndSize.Size = new System.Drawing.Size(100, 20);
             this.textBox_EndSize.TabIndex = 5;
+            this.textBox_EndSize.Text = "100";
             // 
             // label3
             // 
@@ -114,6 +116,7 @@
             this.textBox_StartSize.Name = "textBox_StartSize";
             this.textBox_StartSize.Size = new System.Drawing.Size(100, 20);
             this.textBox_StartSize.TabIndex = 1;
+            this.textBox_StartSize.Text = "1";
             // 
             // tabControl1
             // 
@@ -132,11 +135,11 @@
             // tabPage_Com
             // 
             this.tabPage_Com.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage_Com.Controls.Add(this.button1);
+            this.tabPage_Com.Controls.Add(this.button_ComTest);
             this.tabPage_Com.Controls.Add(this.label5);
-            this.tabPage_Com.Controls.Add(this.textBox2);
+            this.tabPage_Com.Controls.Add(this.textBox_baudrate);
             this.tabPage_Com.Controls.Add(this.label4);
-            this.tabPage_Com.Controls.Add(this.textBox1);
+            this.tabPage_Com.Controls.Add(this.textBox_comPort);
             this.tabPage_Com.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Com.Name = "tabPage_Com";
             this.tabPage_Com.Padding = new System.Windows.Forms.Padding(3);
@@ -144,12 +147,13 @@
             this.tabPage_Com.TabIndex = 0;
             this.tabPage_Com.Text = "COM Port";
             // 
-            // textBox2
+            // textBox_baudrate
             // 
-            this.textBox2.Location = new System.Drawing.Point(64, 32);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 8;
+            this.textBox_baudrate.Location = new System.Drawing.Point(64, 32);
+            this.textBox_baudrate.Name = "textBox_baudrate";
+            this.textBox_baudrate.Size = new System.Drawing.Size(100, 20);
+            this.textBox_baudrate.TabIndex = 8;
+            this.textBox_baudrate.Text = "115200";
             // 
             // label4
             // 
@@ -160,12 +164,12 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "COM Port";
             // 
-            // textBox1
+            // textBox_comPort
             // 
-            this.textBox1.Location = new System.Drawing.Point(64, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 7;
+            this.textBox_comPort.Location = new System.Drawing.Point(64, 6);
+            this.textBox_comPort.Name = "textBox_comPort";
+            this.textBox_comPort.Size = new System.Drawing.Size(100, 20);
+            this.textBox_comPort.TabIndex = 7;
             // 
             // tabPage_Ble
             // 
@@ -204,14 +208,15 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Baudrate";
             // 
-            // button1
+            // button_ComTest
             // 
-            this.button1.Location = new System.Drawing.Point(5, 97);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Start COM Test";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_ComTest.Location = new System.Drawing.Point(5, 97);
+            this.button_ComTest.Name = "button_ComTest";
+            this.button_ComTest.Size = new System.Drawing.Size(97, 23);
+            this.button_ComTest.TabIndex = 4;
+            this.button_ComTest.Text = "Start COM Test";
+            this.button_ComTest.UseVisualStyleBackColor = true;
+            this.button_ComTest.Click += new System.EventHandler(this.button_ComTest_Click);
             // 
             // Form1
             // 
@@ -245,11 +250,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage_Tcp;
         private System.Windows.Forms.TabPage tabPage_Ws;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox_baudrate;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_comPort;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_ComTest;
     }
 }
 
