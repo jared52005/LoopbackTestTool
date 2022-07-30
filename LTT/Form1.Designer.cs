@@ -38,7 +38,6 @@
             this.textBox_StartSize = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_Com = new System.Windows.Forms.TabPage();
-            this.button_ComTest = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_baudrate = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
             this.tabPage_Ble = new System.Windows.Forms.TabPage();
             this.tabPage_Tcp = new System.Windows.Forms.TabPage();
             this.tabPage_Ws = new System.Windows.Forms.TabPage();
+            this.button_Start = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -53,6 +53,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button_Stop = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_Com.SuspendLayout();
@@ -144,7 +145,6 @@
             // tabPage_Com
             // 
             this.tabPage_Com.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage_Com.Controls.Add(this.button_ComTest);
             this.tabPage_Com.Controls.Add(this.label5);
             this.tabPage_Com.Controls.Add(this.textBox_baudrate);
             this.tabPage_Com.Controls.Add(this.label4);
@@ -155,16 +155,6 @@
             this.tabPage_Com.Size = new System.Drawing.Size(509, 126);
             this.tabPage_Com.TabIndex = 0;
             this.tabPage_Com.Text = "COM Port";
-            // 
-            // button_ComTest
-            // 
-            this.button_ComTest.Location = new System.Drawing.Point(5, 97);
-            this.button_ComTest.Name = "button_ComTest";
-            this.button_ComTest.Size = new System.Drawing.Size(97, 23);
-            this.button_ComTest.TabIndex = 4;
-            this.button_ComTest.Text = "Start COM Test";
-            this.button_ComTest.UseVisualStyleBackColor = true;
-            this.button_ComTest.Click += new System.EventHandler(this.button_ComTest_Click);
             // 
             // label5
             // 
@@ -227,6 +217,16 @@
             this.tabPage_Ws.TabIndex = 3;
             this.tabPage_Ws.Text = "WebSocket";
             // 
+            // button_Start
+            // 
+            this.button_Start.Location = new System.Drawing.Point(363, 610);
+            this.button_Start.Name = "button_Start";
+            this.button_Start.Size = new System.Drawing.Size(80, 23);
+            this.button_Start.TabIndex = 4;
+            this.button_Start.Text = "Start Test";
+            this.button_Start.UseVisualStyleBackColor = true;
+            this.button_Start.Click += new System.EventHandler(this.button_Start_Click);
+            // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -276,11 +276,22 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(29, 17);
             this.toolStripStatusLabel1.Text = "N/A";
             // 
+            // button_Stop
+            // 
+            this.button_Stop.Location = new System.Drawing.Point(449, 610);
+            this.button_Stop.Name = "button_Stop";
+            this.button_Stop.Size = new System.Drawing.Size(80, 23);
+            this.button_Stop.TabIndex = 6;
+            this.button_Stop.Text = "Stop Test";
+            this.button_Stop.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(541, 658);
+            this.Controls.Add(this.button_Stop);
+            this.Controls.Add(this.button_Start);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.tabControl1);
@@ -317,7 +328,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox_comPort;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button_ComTest;
+        private System.Windows.Forms.Button button_Start;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -325,6 +336,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button button_Stop;
     }
 }
 

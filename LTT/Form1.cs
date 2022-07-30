@@ -49,6 +49,7 @@ namespace LTT
             }
 
             timer1.Start();
+            button_Stop.Enabled = false;
         }
 
         private void LwProgress(object sender, int e)
@@ -66,6 +67,8 @@ namespace LTT
             {
                 toolStripStatusLabel1.Text = "ERROR";
             }
+            button_Start.Enabled = true;
+            button_Stop.Enabled = false;
         }
 
         private void LwStart(object sender, EventArgs e)
@@ -108,7 +111,7 @@ namespace LTT
             }
         }
 
-        private void button_ComTest_Click(object sender, EventArgs e)
+        private void button_Start_Click(object sender, EventArgs e)
         {
             if(_lw.IsRunning)
             {
@@ -134,6 +137,22 @@ namespace LTT
                 return;
             }
 
+            switch (tabControl1.SelectedTab.Name)
+            {
+                case "tabPage_Com":
+                    Start_Vcp(start, end, count);
+                    break;
+                default:
+                    ShowError("Unknown TabPage: " + tabControl1.SelectedTab.Name);
+                    break;
+            }
+
+            button_Start.Enabled = false;
+            button_Stop.Enabled = true;
+        }
+
+        private void Start_Vcp(int start, int end, int count)
+        {
             int baudrate = ConvertNumberWithSuffix(textBox_baudrate);
             if (baudrate < 0)
             {
