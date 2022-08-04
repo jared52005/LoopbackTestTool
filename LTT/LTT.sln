@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LTT", "LTT.csproj", "{E8C43BE7-5316-49C3-835F-E294BEE3C876}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LTT.Test.Win", "..\LTT.Test.Win\LTT.Test.Win.csproj", "{E8515F02-D871-4C75-B27A-3971D3BC90E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E8C43BE7-5316-49C3-835F-E294BEE3C876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8C43BE7-5316-49C3-835F-E294BEE3C876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8C43BE7-5316-49C3-835F-E294BEE3C876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8515F02-D871-4C75-B27A-3971D3BC90E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8515F02-D871-4C75-B27A-3971D3BC90E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8515F02-D871-4C75-B27A-3971D3BC90E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8515F02-D871-4C75-B27A-3971D3BC90E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
