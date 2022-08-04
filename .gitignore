@@ -178,3 +178,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+wifi_creds.h
